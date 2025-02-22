@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <link rel="icon" href="./imgs//fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./js/index.mjs" type="module" defer></script>
+    <title>Magic Layout</title>
+  </head>
+  <body>
+    <div class="progress"></div>
+
+    <div class="page-title">&lt;CSS&gt;HTML&lt;/JS&gt;</div>
+
+    <div class="modes">
+      <input type="radio" name="mode" id="dark" />
+      <input type="radio" name="mode" id="system" checked />
+      <input type="radio" name="mode" id="light" />
+    </div>
+
+    <!--================ Content Start ================-->
+
+    <main>
+      <div class="filters">
+        <input
+          type="radio"
+          name="filter"
+          id="f-none"
+          data-label="none"
+          checked
+        />
+        <input type="radio" name="filter" id="f-odd" data-label="odd" />
+        <input type="radio" name="filter" id="f-even" data-label="even" />
+        <input type="radio" name="filter" id="f-prime" data-label="prime" />
+        <input type="radio" name="filter" id="f-2th" data-label="2th" />
+      </div>
+
+      <div class="boxes"></div>
+    </main>
+    <!--================= Content End =================-->
+  </body>
+</html>
