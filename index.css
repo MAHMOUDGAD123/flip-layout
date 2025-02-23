@@ -88,9 +88,39 @@
   }
 }
 
-input[type="radio"] {
+input:is([type="radio"], [type="checkbox"]) {
   appearance: none;
   cursor: pointer;
+}
+
+#magicToggle {
+  width: 70px;
+  aspect-ratio: 15/7;
+  border-radius: 100px;
+  border: 4px solid var(--main-col);
+  position: relative;
+  margin-bottom: 20px;
+  contain: layout;
+
+  &::before {
+    content: "";
+    display: block;
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: inherit;
+    background-image: linear-gradient(var(--main-col), var(--main-col3));
+    position: absolute;
+    transition: transform 200ms linear;
+    transform: translateX(0);
+  }
+
+  &:checked {
+    background-color: var(--main-col2);
+
+    &::before {
+      transform: translateX(155%);
+    }
+  }
 }
 
 .modes {

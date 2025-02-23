@@ -3,7 +3,7 @@ import { MagicLayout } from "./magic-layout.mjs";
 (() => {
   /** @type {HTMLDivElement} */
   const boxes = document.querySelector(".boxes");
-  const N = 30;
+  const N = 20;
 
   // initialization
   let frag = new DocumentFragment();
@@ -12,7 +12,7 @@ import { MagicLayout } from "./magic-layout.mjs";
   }
   boxes.appendChild(frag);
 
-  new MagicLayout({
+  const magicLayout = new MagicLayout({
     layoutElement: boxes,
     duration: 500,
     triggersId_actions: new Map([
@@ -23,6 +23,13 @@ import { MagicLayout } from "./magic-layout.mjs";
       ["f-2th", customAction(is2th)],
     ]),
   });
+
+  // toggle layout magic
+  document.getElementById("magicToggle").onclick = (e) => {
+    /**@type {HTMLInputElement} */
+    const toggle = e.currentTarget;
+    magicLayout.toggleLayoutMagic(toggle.checked);
+  };
 
   // Tools
   // ==============================================

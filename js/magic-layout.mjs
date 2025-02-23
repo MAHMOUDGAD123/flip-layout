@@ -11,6 +11,9 @@ export class MagicLayout {
   /**@type {number} */
   #duration;
 
+  /**@type {boolean} */
+  #magicEnabled = true;
+
   /**
    * @param {{
    *    layoutElement: HTMLElement;
@@ -25,9 +28,14 @@ export class MagicLayout {
 
     this.#tiggersMap.forEach((action, id) => {
       document.getElementById(id).onclick = () => {
-        this.#flip(action);
+        this.#magicEnabled ? this.#flip(action) : action(this.#layoutEle);
       };
     });
+  }
+
+  /**@param {boolean} value enable or disable the layout magic effect */
+  toggleLayoutMagic(value) {
+    this.#magicEnabled = value;
   }
 
   #setStartPositions() {
@@ -68,15 +76,19 @@ export class MagicLayout {
   #flip(action) {
     this.#setStartPositions();
     action(this.#layoutEle);
-    this.#setEndPositionsAndDelta();
 
+    // get the last position after reflow and before the next paint
     requestAnimationFrame(() => {
+      this.#setEndPositionsAndDelta();
+
       for (const ele of this.#layoutEle.children) {
         const delta = this.#positions.get(ele.id).delta;
         // jump
         ele.style.transform = `translateX(${delta.x}px) translateY(${delta.y}px)`;
         ele.style.transition = "transform 0s";
 
+        // make the CSS see the change before the next repaint
+        // to enable the transition
         requestAnimationFrame(() => {
           // animate
           ele.style.transform = "translateX(0) translateY(0)";
