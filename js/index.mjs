@@ -14,7 +14,7 @@ import { MagicLayout } from "./magic-layout.mjs";
 
   const magicLayout = new MagicLayout({
     layoutElement: boxes,
-    duration: 500,
+    duration: 1000,
     triggersId_actions: new Map([
       ["f-none", noneAction],
       ["f-odd", customAction(isOdd)],
@@ -35,16 +35,17 @@ import { MagicLayout } from "./magic-layout.mjs";
   // ==============================================
   /**
    * @param {string} index
-   * @param {boolean} animate
+   * @param {boolean} staticDelay
    * @returns {HTMLDivElement}
    */
-  function createBox(index) {
+  function createBox(index, staticDelay) {
+    const delay = staticDelay ? "150" : `${index * 50}`;
     const div = document.createElement("div");
     div.id = `box-${index}`;
     div.innerText = `${index}`;
     div.className = "box";
     div.style.opacity = 0;
-    div.style.animation = `fade-in 1s ${index * 30}ms forwards`;
+    div.style.animation = `fade-in 1s ${delay}ms forwards`;
     return div;
   }
 

@@ -28,7 +28,7 @@ export class MagicLayout {
 
     this.#tiggersMap.forEach((action, id) => {
       document.getElementById(id).onclick = () => {
-        this.#magicEnabled ? this.#flip(action) : action(this.#layoutEle);
+        this.#magicEnabled ? this.flip(action) : action(this.#layoutEle);
       };
     });
   }
@@ -73,7 +73,7 @@ export class MagicLayout {
    * this function make all the magic animation in the layout
    * @param {(layoutElement: HTMLElement) => void} action the callback action function to update the layout
    */
-  #flip(action) {
+  flip(action) {
     this.#setStartPositions();
     action(this.#layoutEle);
 
